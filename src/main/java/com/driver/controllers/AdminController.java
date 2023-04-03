@@ -1,5 +1,8 @@
 package com.driver.controllers;
 
+import com.driver.Exception.AdminNotFound;
+import com.driver.model.Admin;
+import com.driver.model.ServiceProvider;
 import com.driver.services.impl.AdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +23,7 @@ public class AdminController {
     }
 
     @PostMapping("/addProvider")
-    public ResponseEntity<Void> addServiceProvider(@RequestParam int adminId, @RequestParam String providerName){
+    public ResponseEntity<Void> addServiceProvider(@RequestParam int adminId, @RequestParam String providerName) throws AdminNotFound {
         //add a serviceProvider under the admin and return updated admin
         Admin admin = adminService.addServiceProvider(adminId, providerName);
         return new ResponseEntity<>(HttpStatus.OK);
