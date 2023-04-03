@@ -1,6 +1,5 @@
 package com.driver.controllers;
 
-import com.driver.Exception.AdminNotFound;
 import com.driver.model.Admin;
 import com.driver.model.ServiceProvider;
 import com.driver.services.impl.AdminServiceImpl;
@@ -23,7 +22,7 @@ public class AdminController {
     }
 
     @PostMapping("/addProvider")
-    public ResponseEntity<Void> addServiceProvider(@RequestParam int adminId, @RequestParam String providerName) throws AdminNotFound {
+    public ResponseEntity<Void> addServiceProvider(@RequestParam int adminId, @RequestParam String providerName){
         //add a serviceProvider under the admin and return updated admin
         Admin admin = adminService.addServiceProvider(adminId, providerName);
         return new ResponseEntity<>(HttpStatus.OK);
