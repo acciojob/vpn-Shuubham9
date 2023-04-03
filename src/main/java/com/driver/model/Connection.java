@@ -1,35 +1,29 @@
 package com.driver.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Connection")
 public class Connection {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
     @JoinColumn
-    User user;
+    private ServiceProvider serviceProvider;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn
-    ServiceProvider serviceProvider;
+    private User user;
 
-    public Connection() {
+    public Connection(int id, ServiceProvider serviceProvider, User user) {
+        this.id = id;
+        this.serviceProvider = serviceProvider;
+        this.user = user;
     }
 
-    public Connection(int id, User user, ServiceProvider serviceProvider) {
-        this.id = id;
-        this.user = user;
-        this.serviceProvider = serviceProvider;
+    public Connection() {
     }
 
     public int getId() {
@@ -40,19 +34,19 @@ public class Connection {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public ServiceProvider getServiceProvider() {
         return serviceProvider;
     }
 
     public void setServiceProvider(ServiceProvider serviceProvider) {
         this.serviceProvider = serviceProvider;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

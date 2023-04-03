@@ -1,33 +1,28 @@
-package com.driver.model;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package com.driver.model;// Note: Do not write @Enumerated annotation above CountryName in this model.
 
 import javax.persistence.*;
 
-// Note: Do not write @Enumerated annotation above CountryName in this model.
 @Entity
-public  class Country {
+public class Country{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    CountryName countryName;
+    private CountryName countryName;
 
-    String code;
+    private String code;
 
-    @OneToOne(mappedBy = "country", cascade = CascadeType.ALL)
-    User user;
+    //todo
+    //mappings
+
+    @OneToOne
+    @JoinColumn
+    private User user;
 
     @ManyToOne
     @JoinColumn
-    ServiceProvider serviceProvider;
-
-    public Country() {
-    }
+    private ServiceProvider serviceProvider;
 
     public Country(int id, CountryName countryName, String code, User user, ServiceProvider serviceProvider) {
         this.id = id;
@@ -35,6 +30,9 @@ public  class Country {
         this.code = code;
         this.user = user;
         this.serviceProvider = serviceProvider;
+    }
+
+    public Country() {
     }
 
     public int getId() {

@@ -1,39 +1,39 @@
 package com.driver.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="Admin")
 public class Admin {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    String username;
+    private String username;
 
-    String password;
+    private String password;
 
-    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
-    List<ServiceProvider> serviceProviders;
+    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
+    private List<ServiceProvider> serviceProviders = new ArrayList<>();
+
+    public Admin(int id, String username, String password, List<ServiceProvider> serviceProviders) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.serviceProviders = serviceProviders;
+    }
 
     public Admin() {
     }
 
-    public Admin(String username, String password) {
-        this.username = username;
-        this.password = password;
-        this.serviceProviders = new ArrayList<>();
-    }
-
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
